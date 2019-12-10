@@ -1,0 +1,23 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Hoxworth Data Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-12">
+        <div id="content">
+            <iframe src="http://52.191.118.216/Reports/report/Hoxworth/Hoxworth%20Data%20Summary?rs:Embed=true" name="frame2" id="frame2" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" onload="" allowtransparency="false"></iframe>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".main-nav li").removeClass("active");
+    $('#li_data').addClass('active');
+
+    $(document).ready(function () {
+        
+    });
+</script>
+
+
+

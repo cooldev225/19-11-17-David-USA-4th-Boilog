@@ -1,0 +1,163 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Biolog-insight | Login</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body class="light-back h-100">
+
+    <div class="container-fluid h-100 p-0">
+        <div class="row no-gutters h-100">
+            <div class="col-6 d-none d-lg-block left-back">
+                <!--no content here-->
+            </div>
+            <div class="col-lg-6">
+                <div class="container-fluid d-flex h-100 flex-column">
+                    <div class="row no-gutters flex-fill d-flex justify-content-center align-items-center">
+                        <!-- Login form goes here -->
+                        <form class="w-75 mx-auto p-md-4 form-login" id="login-form">
+                            <h4 class="text-center pt-3 m-0 text-p c-font l-s">Biolog-insight</h4>
+                            <p class="m-0 mt-1 text-muted text-center text-read">Welcome back! Please login to your account.</p>
+                            <div class="p-md-4">
+                                <div class="form-group input-material">
+                                    <input type="text" class="form-control" id="username" name="username">
+                                    <label for="username">Username</label>
+                                </div>
+                                <div class="form-group input-material">
+                                    <input type="password" class="form-control" id="password" name="password">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="form-check mt-5 p-0" id="div_error" style="display:none;">
+                                    <label class="form-check-label custom-check text-danger">
+                                        You are not authorized to log in. Please confirm your credentails.
+                                    </label>
+                                </div>
+                                <div class="form-group mt-5 btn-center">
+                                    <input type="button" onclick="return validate()" value="Login" id="btnLogin" class="btn btn-lg btn-primary f-90 border-0 pl-5 pr-5 back-p" />
+                                </div>
+                                <div class="form-group mt-5 btn-center" style="margin-top:1px!important;">
+                                    <img src="~/images/Biolog-id Logo.png" style="width: 300px;" class="img-logo" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col f-90">
+                            <p class="small text-center">
+                                <a href="#" class="text-p mr-3">Terms & Conditions</a>
+                                <a href="#" class="text-p">Privacy Policy</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Hidden("RedirectTo", Url.Action("Index", "Home"));
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script src="vendor/jquery/jquery.slim.min.js"></script> -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script>
+      var urlPost = '@Url.Action("Index", "Login")';
+        $.fn.materializeInputs = function (selectors) {
+
+      // default param with backwards compatibility
+      if (typeof(selectors)==='undefined') selectors = "input, textarea";
+
+      // attribute function
+      function setInputValueAttr(element) {
+          element.setAttribute('value', element.value);
+      }
+
+      // set value attribute at load
+      this.find(selectors).each(function () {
+          setInputValueAttr(this);
+      });
+
+      // on keyup
+      this.on("keyup", selectors, function() {
+          setInputValueAttr(this);
+      });
+    };
+    $('document').ready(function(){
+      // enable material-style inputs in entire body
+        $('#login-form').materializeInputs();
+
+
+
+        $('#login-form').keypress(keypressHandler);
+    });
+
+        function keypressHandler(e) {
+            if (e.which == 13) {
+                validate(event);
+            }
+        }
+
+
+    /* validates the login form */
+        function validate(event) {
+            $('#btnLogin').attr("disabled", true);
+            $("#div_error").hide();
+      $form = $('#login-form');
+      $username = $form.find("input[name='username']");
+      $password = $form.find("input[name='password']");
+      var valid = true;
+      if($username.val()==''){
+        $username.addClass("invalid");
+        valid =false;
+      }else
+        $username.removeClass("invalid");
+
+      if($password.val()==''){
+        $password.addClass("invalid");
+        valid =false;
+      }else
+        $password.removeClass("invalid");
+
+      if(!valid){
+        if(event)
+              event.preventDefault();
+          $('#btnLogin').attr("disabled", false);
+        return false;
+        }
+      else {
+
+          $.ajax({
+              url: urlPost,
+              data: $('#login-form').serialize(),
+              type: 'POST',
+              success: function (response) {
+
+                  if (response == "failure") {
+                      $("#div_error").show('slow');
+                      $('#btnLogin').attr("disabled", false);
+                  }
+                  else {
+                      var url = $("#RedirectTo").val();
+                      location.href = url;
+                  }
+              },
+              error: function (xhr, textStatus, errorThrown) {
+
+              }
+          });
+      }
+    }</script>
+</body>
+</html>
+

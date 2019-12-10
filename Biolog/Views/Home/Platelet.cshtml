@@ -1,0 +1,48 @@
+﻿@using ReportViewerForMvc;
+@{
+    ViewBag.Title = "Platelet Study Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+  
+
+    .explorationContainer .exploreCanvas .backgroundContainer.visualBackgroundContainer {
+        background-color: rgb(247, 247, 247) !important;
+    }
+</style>
+<div id="content">
+    <iframe src="http://52.191.118.216/reports/powerbi/Hoxworth/Hoxworth%20Platelet%20Study?rs:Embed=true" name="frame2" id="frame2" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" onload="" allowtransparency="false"></iframe>
+</div>
+
+
+@*<h5 class="p-2 m-3  ml-4">Platelet Study Dashboard</h5>*@
+@*<iframe id="framePlatelet" name="framePlatelet"  width="100%"  frameborder="0" src="http://52.191.118.216/reports/powerbi/Hoxworth/Hoxworth%20Platelet%20Study?rs:Embed=true" style="height:700px;"></iframe>*@
+@*@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)*@
+
+<script type="text/javascript">
+    $(".main-nav li").removeClass("active");
+    $('#li_platelet').addClass('active');
+
+    //$('iframe').load(function () {
+    //    $('iframe').contents().find("head")
+    //        .append($("<style type='text/css'>  .displayArea{ box-shadow: none !important;}  </style>"));
+    //});
+
+    //var frameListener;
+    //$(window).load(function () {
+    //    frameListener = setInterval("frameLoaded()", 50);
+    //});
+    //function frameLoaded() {
+    //    var frame = $('iframe').get(0);
+    //    if (frame != null) {
+    //        var frmHead = $(frame).contents().find('head');
+    //        if (frmHead != null) {
+    //            clearInterval(frameListener); // stop the listener
+    //            frmHead.append($("<style type='text/css'>  .displayArea{ box-shadow: none !important;}  </style>")); // clone existing css link
+    //            //frmHead.append($("<link/>", { rel: "stylesheet", href: "/styles/style.css", type: "text/css" })); // or create css link yourself
+    //        }
+    //    }
+    //}
+</script>
+

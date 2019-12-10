@@ -1,0 +1,180 @@
+﻿@model Biolog.Models.Dashboard
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Biolog-insight</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap1.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--
+        <link rel="stylesheet" href="~/css/style.css">
+
+        -->
+    <link rel="stylesheet" href="~/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/css/_all-skins.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <script src="~/js/jquery.min.js"></script>
+    <style>
+        .menu-top-level {
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index2.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>B</b>ID</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Biolog</b>L>>id</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <ul class="sidebar-menu" data-widget="tree">
+                    @if (ViewBag.current_page.Equals("index"))
+                    {
+                        <li id="li_home" class="active treeview">
+                            <a href="@Url.Action("Index","Home")" class="text-white"><i class="fa fa-home"></i><span class="link">Home</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li id="li_home" class="treeview">
+                            <a href="@Url.Action("Index","Home")" class="text-white"><i class="fa fa-home"></i><span class="link">Home</span></a>
+                        </li>
+                    }
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if (Model.PowerBiCount > 0)
+                            {
+                                for (int i = 0; i < Model.PowerBiCount; i++)
+                                {
+                                    if (ViewBag.current_page.Equals(Model.PowerBiModelList[i].Name))
+                                    {
+                                        <li class="active">
+                                            <!--<a href="@*Url.Action("ReportView?cpg="+Model.PowerBiModelList[i].Name,"Home")*@" class="text-white">-->
+
+                                            <a href="@Url.Action("ReportView", "Home")?cpg=@Model.PowerBiModelList[i].Name&ctp=powerbi&cfd=@ViewBag.current_folder" class="text-white">
+                                                <img src="@Url.Content("~/images/powerbi_icon-white.svg")" width="18px;" />
+                                                <span class="link">@Model.PowerBiModelList[i].Name</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <!--<a href="@*Url.Action("ReportView?cpg="+Model.PowerBiModelList[i].Name,"Home")*@" class="text-white">-->
+
+                                            <a href="@Url.Action("ReportView", "Home")?cpg=@Model.PowerBiModelList[i].Name&ctp=powerbi&cfd=@ViewBag.current_folder" class="text-white">
+                                                <img src="@Url.Content("~/images/powerbi_icon-white.svg")" width="18px;" />
+                                                <span class="link">@Model.PowerBiModelList[i].Name</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            }
+
+                            @if (Model.ReportCount > 0)
+                            {
+                                for (int i = 0; i < Model.ReportCount; i++)
+                                {
+                                    if (ViewBag.current_page.Equals(Model.ReportModelList[i].Name))
+                                    {
+                                        <li class="active">
+                                            <a href="@Url.Action("ReportView", "Home")?cpg=@Model.ReportModelList[i].Name&ctp=report&cfd=@ViewBag.current_folder" class="text-white">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                                <span class="link">@Model.ReportModelList[i].Name.Replace("Units with Extended", "Units w/Extended")</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("ReportView", "Home")?cpg=@Model.ReportModelList[i].Name&ctp=report&cfd=@ViewBag.current_folder" class="text-white">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                                <span class="link">@Model.ReportModelList[i].Name.Replace("Units with Extended", "Units w/Extended")</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </li>
+
+                    @if (ViewBag.current_page.Equals("guide"))
+                    {
+                        <li class="active">
+                            <a href="@Url.Action("Guide", "Home")?cfd=@ViewBag.current_folder" class="text-white"><i class="fa fa-adjust"></i><span class="link">User Guide</span></a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href="@Url.Action("Guide", "Home")?cfd=@ViewBag.current_folder" class="text-white"><i class="fa fa-adjust"></i><span class="link">User Guide</span></a>
+                        </li>
+                    }
+                    <li>
+                        <a href="#" class="text-white"><i class="fa fa-cog"></i><span class="link">Settings</span></a>
+                    </li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Dashboard
+                    <small>Control panel</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Dashboard</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section>
+            <!-- /.content -->
+        </div>
+
+
+    </div>
+<!-- Bootstrap core JavaScript  @*RenderBody()*@ -->
+    <!-- <script src="vendor/jquery/jquery.slim.min.js"></script> -->
+    
+    <script src="~/js/bootstrap1.min.js"></script>
+    <script src="~/js/adminlte.min.js"></script>
+    <script src="~/scripts/powerbi.js"></script>
+</body>
+</html>

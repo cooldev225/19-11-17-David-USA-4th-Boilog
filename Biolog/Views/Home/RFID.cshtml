@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "RFID Profile Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="content">
+    <iframe src="http://52.191.118.216/Reports/report/Hoxworth/RDIF%20Profile?rs:Embed=true" name="frame2" id="frame2" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" onload="" allowtransparency="false"></iframe>
+</div>
+
+@*<iframe frameborder="0" width="1450" height="780" id="frame" name="frame" src="http://52.191.118.216/Reports/report/Hoxworth/RDIF%20Profile?rs:Embed=true" scrolling="no" seamless="seamless" style="-webkit-transform:scale(0.9);-moz-transform-scale(0.9);"></iframe>*@
+<script type="text/javascript">
+    $(".main-nav li").removeClass("active");
+    $('#li_efid').addClass('active');
+</script>
+
+
+

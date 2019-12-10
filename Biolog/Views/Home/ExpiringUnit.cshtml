@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Expiring Unit Tracking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div id="content">
+            <iframe src="http://52.191.118.216/Reports/report/Hoxworth/Hoxworth%20Expiration%20Detail?rs:Embed=true" name="frame2" id="frame2" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" onload="" allowtransparency="false"></iframe>
+        </div>
+    </div>
+</div>
+@*<iframe id="frameunit" name="frameunit" frameborder="0" seamless="seamless" width="1350" height="700" src="http://52.191.118.216/Reports/report/Hoxworth/Hoxworth%20Expiration%20Detail?rs:Embed=true"></iframe>*@
+
+<script type="text/javascript">
+    $(".main-nav li").removeClass("active");
+    $('#li_expiring').addClass('active');
+</script>

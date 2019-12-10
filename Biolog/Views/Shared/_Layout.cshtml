@@ -1,0 +1,296 @@
+﻿@using Biolog.Models.Guide
+@model Biolog.Models.Dashboard
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Biolog-insight</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    @* <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />*@
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/style.css"/>
+    <!--link rel="stylesheet" href="~/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/css/_all-skins.min.css">-->
+
+
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/scripts/powerbi.js"></script>
+    <style>
+        .menu-top-level {
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper h-100">
+        <div class="sidebar back-p h-100 open" id="sidebar">
+            <div class="top">
+                <div class="left cd-center back-p-s flex-fill">
+                    <span class="d-block c-font f-120 text-white l-s">Biolog-insight</span>
+                </div>
+                <div class="right cd-center text-white c-pointer menu-toggle-button">
+                    <i class="fa fa-bars fa-2x"></i>
+                </div>
+            </div>
+            <div class="menu back-p flex-fill">
+                <nav class="main-nav f-110">
+                    <ul data-widget="tree">
+                        @if (ViewBag.current_page.Equals("index"))
+                        {
+                            <li id="li_home" class="active treeview">
+                                <a href="@Url.Action("Index","Home")" class="text-white"><i class="fa fa-home"></i><span class="link">Home</span><i class="fa fa-angle-down pull-right"></i></a>
+                            </li>
+                        }
+                        else if (ViewBag.current_page.Equals("guide"))
+                        {
+                            <li id="li_home" class="treeview">
+                                <a href="@Url.Action("Index","Home")" class="text-white"><i class="fa fa-home"></i><span class="link">Home</span><i class="fa fa-angle-left pull-right"></i></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li id="li_home" class="treeview">
+                                <a href="@Url.Action("Index","Home")" class="text-white"><i class="fa fa-home"></i><span class="link">Home</span><i class="fa fa-angle-down pull-right"></i></a>
+                            </li>
+                        }
+
+
+                        @if (Model.PowerBiCount > 0 && !ViewBag.current_page.Equals("guide"))
+                        {
+                            for (int i = 0; i < Model.PowerBiCount; i++)
+                            {
+                                if (ViewBag.current_page.Equals(Model.PowerBiModelList[i].Name))
+                                {
+                                    <li class="active">
+                                        <!--<a href="@*Url.Action("ReportView?cpg="+Model.PowerBiModelList[i].Name,"Home")*@" class="text-white">-->
+
+                                        <a href="@Url.Action("ReportView", "Home")?cpg=@Model.PowerBiModelList[i].Name&ctp=powerbi&cfd=@ViewBag.current_folder" class="text-white">
+                                            <img src="@Url.Content("~/images/powerbi_icon-white.svg")" width="18px;" />
+                                            <span class="link">@Model.PowerBiModelList[i].Name</span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <!--<a href="@*Url.Action("ReportView?cpg="+Model.PowerBiModelList[i].Name,"Home")*@" class="text-white">-->
+
+                                        <a href="@Url.Action("ReportView", "Home")?cpg=@Model.PowerBiModelList[i].Name&ctp=powerbi&cfd=@ViewBag.current_folder" class="text-white">
+                                            <img src="@Url.Content("~/images/powerbi_icon-white.svg")" width="18px;" />
+                                            <span class="link">@Model.PowerBiModelList[i].Name</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+
+                        @if (Model.ReportCount > 0 && !ViewBag.current_page.Equals("guide"))
+                        {
+                            for (int i = 0; i < Model.ReportCount; i++)
+                            {
+                                if (ViewBag.current_page.Equals(Model.ReportModelList[i].Name))
+                                {
+                                    <li class="active">
+                                        <a href="@Url.Action("ReportView", "Home")?cpg=@Model.ReportModelList[i].Name&ctp=report&cfd=@ViewBag.current_folder" class="text-white">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                            <span class="link">@Model.ReportModelList[i].Name.Replace("Units with Extended", "Units w/Extended")</span>
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a href="@Url.Action("ReportView", "Home")?cpg=@Model.ReportModelList[i].Name&ctp=report&cfd=@ViewBag.current_folder" class="text-white">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                            <span class="link">@Model.ReportModelList[i].Name.Replace("Units with Extended", "Units w/Extended")</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+
+
+                        @if (ViewBag.current_page.Equals("guide"))
+                        {
+                            <li class="active">
+                                <a href="@Url.Action("Guide", "Home")?cfd=@ViewBag.current_folder" class="text-white"><i class="fa fa-adjust"></i><span class="link">User Guide</span><i class="fa fa-angle-down pull-right"></i></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("Guide", "Home")?cfd=@ViewBag.current_folder" class="text-white"><i class="fa fa-adjust"></i><span class="link">User Guide</span><i class="fa fa-angle-left pull-right"></i></a>
+                            </li>
+                        }
+
+                        @if (ViewBag.reportList!=null&&ViewBag.reportList.Count > 0 && ViewBag.current_page.Equals("guide"))
+                        {
+                            foreach (Reports r in ViewBag.reportList)
+                            {
+                                if (r.Kindx == 0)
+                                {
+                                    if (ViewBag.current_rid.Equals(r.Id))
+                                    {
+                                        <li class="active">
+                                            <a href="@Url.Action("Guide", "Home")?rid=@r.Id&cfd=@ViewBag.current_folde" class="text-white">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                                <span class="link">@r.ReportName</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Guide", "Home")?rid=@r.Id&cfd=@ViewBag.current_folde" class="text-white">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                                <span class="link">@r.ReportName</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            }
+
+                            foreach (Reports r in ViewBag.reportList)
+                            {
+                                if (r.Kindx == 1)
+                                {
+                                    if (ViewBag.current_rid.Equals(r.Id))
+                                    {
+                                        <li class="active">
+                                            <a href="@Url.Action("Guide", "Home")?rid=@r.Id&cfd=@ViewBag.current_folde" class="text-white">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                                <span class="link">@r.ReportName</span>
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Guide", "Home")?rid=@r.Id&cfd=@ViewBag.current_folde" class="text-white">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                                <span class="link">@r.ReportName</span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            }
+                        }
+
+                        <li>
+                            <a href="#" class="text-white"><i class="fa fa-cog"></i><span class="link">Settings</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        @* <div class="content flex-fill h-100 light-back">*@
+        <div class="content flex-fill d-flex flex-column light-back">
+            <!--Here will go the header-->
+            <div class="container-fluid p-0">
+                <div class="header d-flex bg-white h-60">
+                    <div class="menu-con pl-3 pr-3 cd-center text-white c-pointer menu-toggle-button">
+                        <i class="fa text-p fa-bars fa-2x"></i>
+                    </div>
+                    <div class="searchbox d-flex flex-fill cd-center pl-md-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text border-0 bg-transparent" id="basic-addon1"><i class="fa fa-search icon fa-color"></i></span>
+                            </div>
+                            <input type="text" class="form-control border-0" placeholder="Search hospitals, products, units or help" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="usercon d-flex" style="width:auto;">
+
+
+                        @if (ViewBag.folders.Count > 0)
+                        {
+                            <div class="noti col pt-0 pb-0 pl-3 pr-3 cd-center d-flex f-120 text-muted border-right">
+                                <button class="p-0 m-0 border-0 bg-transparent h-100 dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="pr-2 pro-name">@ViewBag.current_folder</span>
+                                    @if (ViewBag.folders.Count > 1)
+                                    {
+                                        <i class="fa fa-chevron-down pr-3"></i>
+                                    }
+                                </button>
+                                @if (ViewBag.folders.Count > 1)
+                                {
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @for (var i = 0; i < ViewBag.folders.Count; i++)
+                                        {
+                                            if (!ViewBag.folders[i].Equals(ViewBag.current_folder))
+                                            {
+                                                <a class="dropdown-item text-secondary" href="@Url.Action("Index", "Home")?cfd=@ViewBag.folders[i]">@ViewBag.folders[i]</a>
+                                            }
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                        <div class="col drop-con pt-0 pb-0 pl-3 pr-3 cd-center d-flex flex-fill">
+                            <button class="p-0 m-0 border-0 bg-transparent h-100 dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="pr-2 pro-name">@ViewBag.username</span>
+                                <i class="fa fa-chevron-down pr-3"></i>
+                                <img src="~/images/user.png" class="rounded-circle" width="40" height="40">
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item text-secondary" href="#">Account Setting</a>
+                                <a class="dropdown-item text-secondary" href="@Url.Action("Guide", "Home")?cfd=@ViewBag.current_folder">User Guide</a>
+                                <a class="dropdown-item text-secondary" href="@Url.Action("Logout","Login")">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- here will go the content -->
+            <div class="container-fluid flex-fill">
+                @RenderBody()
+            </div>
+
+            <div class="card-footer"
+                 style="background: #fff;
+                border-top: 1px solid #dee2e6;
+                padding: 1rem 0.75rem;">
+                <div class="container-fluid">
+                    <div class="text-muted row">
+                        <div class="container-fluid clearfix">
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © <a href="http://www.bootstrapdash.com/" target="_blank">Biolog-Id</a>. All rights reserved.</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                                © 2019 - AppStack
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script src="vendor/jquery/jquery.slim.min.js"></script> -->
+
+    
+    <script>
+        $(document).ready(function () {
+            $sidebar = $('#sidebar');
+            if (window.innerWidth <= '767') {
+                $sidebar.removeClass("s-open open");
+            }
+
+
+            $('div.menu-toggle-button').on('click', function () {
+                if ($sidebar.hasClass("s-open")) {
+                    $sidebar.removeClass("s-open");
+                }
+                $sidebar.toggleClass('open');
+            });
+        });</script>
+</body>
+</html>

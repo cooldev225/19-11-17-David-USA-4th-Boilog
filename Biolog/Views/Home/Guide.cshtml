@@ -1,0 +1,462 @@
+﻿@{
+    ViewData["Title"] = "Biolog>>Id Report Guide";
+}
+@using Biolog.Models.Guide
+<style>
+    .form-reports {
+        padding-left: 16px;
+        margin-bottom: 3px;
+    }
+
+        .form-reports a {
+        }
+
+    .card-box-1st {
+        background-color: #ffffff;
+    }
+
+    .card-box-2nd {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+    }
+
+    .card-box-3rd {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+    }
+
+        .card-box-2nd .card-body, .card-box-3rd .card-body {
+            padding: 0px;
+        }
+
+    .report-sub-title {
+        font-size: 14px;
+        font-weight: bold;
+        padding-top: 9px;
+    }
+
+    .report-sub-normal {
+        font-size: 14px;
+        font-weight: 200;
+        margin-bottom: 5px;
+        padding-top: 0px;
+        color: #796e6e;
+    }
+
+    .word-wrap {
+        word-break: break-all;
+        // word-wrap: break-word;
+        // overflow-wrap: break-word;
+    }
+
+    .no-wrap {
+        white-space: nowrap;
+    }
+
+    .fixed {
+        table-layout: fixed;
+    }
+
+    .text-wrap {
+        white-space: normal;
+    }
+
+    .width-200 {
+        width: 200px;
+    }
+
+    .tab-pane {
+        background-color: white;
+        color: #796e6e;
+    }
+
+    .table td, .table thead th, .nav-tabs .nav-link {
+        color: #796e6e;
+    }
+
+        .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+            border-color: #d4d5d6 #d4d5d6 #ffffff;
+            background-color: white;
+        }
+</style>
+
+<div class="row" style="background-repeat: repeat-x;padding-top: 4px;background-image: url('~/../../banner_bg.png');"></div>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-3 grid-margin stretch-card" style="display: none;">
+            <div class="card card-box-1st">
+                <div class="card-body" style="text-align: left;padding: 14px;">
+                    <h2 class="card-title" style="margin-bottom: 1px;">
+                        Report Links
+                    </h2>
+                    <div style="border-top-style:solid; border-top-width: 1px;color: #a1bbd5;"></div>
+                    <p class="card-description" style="margin-top: 15px;margin-bottom:0px;font-weight:bold;"><i class="fa fa-bar-chart-o"></i>&nbsp;Operational Reports</p>
+
+                    @{
+                        foreach (Reports r in ViewBag.reportList)
+                        {
+                            if (r.Kindx == 0)
+                            {
+                                <div class="form-group form-reports">
+                                    <a style="color:#7092d3;" href="@Url.Action("Guide", "Home")?rid=@r.Id&cfd=@ViewBag.current_folder">@r.ReportName</a>
+                                </div>
+                            }
+                        }
+                    }
+
+                    <p class="card-description" style="margin-top: 15px;margin-bottom:0px;font-weight:bold;"><i class="fa fa fa-ravelry"></i>&nbsp;BI Solutions</p>
+
+                    @{
+                        foreach (Reports r in ViewBag.reportList)
+                        {
+                            if (r.Kindx == 1)
+                            {
+                                <div class="form-group form-reports">
+                                    <a style="color:#7092d3;" href="@Url.Action("Guide", "Home")?rid=@r.Id&cfd=@ViewBag.current_folder">@r.ReportName</a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 grid-margin stretch-card" style="display: block;">
+            <div class="card card-box-2nd">
+                <div class="card-body" style="text-align:left;">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4>Report Name: @ViewBag.reportList[ViewBag.cid].ReportName</h4>
+                            @{
+                                foreach (ReportInfo r in ViewBag.userList)
+                                {
+                                    <p class="report-sub-normal">@r.InfoName</p>
+                                }
+                            }
+
+
+                            <p class="report-sub-title">Frequency:</p>
+                            @{
+                                foreach (ReportInfo r in ViewBag.freqList)
+                                {
+                                    <p class="report-sub-normal">•	@r.InfoName</p>
+                                }
+                            }
+
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="~/@ViewBag.screenUrl" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="report-sub-title">Purpose:</p>
+                            <p class="report-sub-normal">
+                                @ViewBag.reportList[ViewBag.cid].Purpose
+                            </p>
+                            <p class="report-sub-title">Legend:</p>
+                            @{
+                                foreach (string r in @ViewBag.reportList[ViewBag.cid].Audience.Split('.'))
+                                {
+                                    <p class="report-sub-normal">@Html.Raw(r)</p>
+                                }
+                            }
+
+                            <p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-filter-tab" data-toggle="tab" href="#nav-filter" role="tab" aria-controls="nav-filter" aria-selected="true">Filters</a>
+                                    <a class="nav-item nav-link" id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab" aria-controls="nav-summary" aria-selected="false">Summary Counts</a>
+                                    <a class="nav-item nav-link" id="nav-column-tab" data-toggle="tab" href="#nav-column" role="tab" aria-controls="nav-column" aria-selected="false">Columns</a>
+                                    <a class="nav-item nav-link" id="nav-drill1-tab" data-toggle="tab" href="#nav-drill1" role="tab" aria-controls="nav-drill1" aria-selected="false">Drill-down-1</a>
+                                    <a class="nav-item nav-link" id="nav-drill2-tab" data-toggle="tab" href="#nav-drill2" role="tab" aria-controls="nav-drill2" aria-selected="false">Drill-down-2</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-filter" role="tabpanel" aria-labelledby="nav-filter-tab">
+                                    <table id="filter-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Filter Name</th>
+                                                <th width="100">Description</th>
+                                                <th>Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.filterList)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
+                                    <table id="summary-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.summaryList)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-column" role="tabpanel" aria-labelledby="nav-column-tab">
+                                    <table id="column-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Column Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.columnList)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-drill1" role="tabpanel" aria-labelledby="nav-drill1-tab">
+                                    <table id="drill1-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Column Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.drill1List)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-drill2" role="tabpanel" aria-labelledby="nav-drill2-tab">
+                                    <table id="drill2-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.drill2List)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/datatables.net/js/jquery.dataTables.min.js"></script>
+<script>
+        function getWidth() {
+          return Math.max(
+            document.body.scrollWidth,
+            document.documentElement.scrollWidth,
+            document.body.offsetWidth,
+            document.documentElement.offsetWidth,
+            document.documentElement.clientWidth
+          );
+        }
+        function resize_screen() {
+            if (getWidth() < 1355) $("#home_banner_right").css('display', 'none');
+            else $("#home_banner_right").css('display','block');
+        }
+        $(window).resize(function(){resize_screen();});
+        $(document).ready(function () {
+            var h = Math.max($("#home-card-left").css('height').replace("px", ""), $("#home-card-right").css('height').replace("px", ""));
+            if (h > 0) {
+                $("#home-card-left").css('height', h);
+                $("#home-card-right").css('height', h);
+            }
+            resize_screen();
+            $("#filter-table").removeAttr('width').dataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                columnDefs: [
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                        },
+                        targets: 0
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:200px;'>" + data + "</div>";
+                        },
+                        targets: 1
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap'>" + data + "</div>";
+                        },
+                        targets: 2
+                    }
+                ]
+            });
+
+            $("#summary-table").removeAttr('width').dataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                columnDefs: [
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                        },
+                        targets: 0
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                        },
+                        targets: 1
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap'>" + data + "</div>";
+                        },
+                        targets: 2
+                    }
+                ]
+            });
+
+            $("#column-table").removeAttr('width').dataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                columnDefs: [
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                        },
+                        targets: 0
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                        },
+                        targets: 1
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap'>" + data + "</div>";
+                        },
+                        targets: 2
+                    }
+                ]
+            });
+
+            $("#drill1-table").removeAttr('width').dataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                columnDefs: [
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                        },
+                        targets: 0
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                        },
+                        targets: 1
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap'>" + data + "</div>";
+                        },
+                        targets: 2
+                    }
+                ]
+            });
+
+            $("#drill2-table").removeAttr('width').dataTable({
+                "paging": false,
+                "ordering": false,
+                "info": false,
+                "searching": false,
+                columnDefs: [
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                        },
+                        targets: 0
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                        },
+                        targets: 1
+                    },
+                    {
+                        render: function (data, type, full, meta) {
+                            return "<div class='text-wrap'>" + data + "</div>";
+                        },
+                        targets: 2
+                    }
+                ]
+            });
+        });
+</script>

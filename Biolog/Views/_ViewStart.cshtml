@@ -1,0 +1,10 @@
+﻿@{
+    if (Context.Request.Path.ToString().StartsWith("/Admin", StringComparison.OrdinalIgnoreCase))
+    {
+        Layout = "~/Views/Shared/_AdminLayout.cshtml";//"_Layout";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml"; 
+    }
+}

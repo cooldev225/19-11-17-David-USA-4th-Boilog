@@ -1,0 +1,104 @@
+﻿@model Biolog.Models.Dashboard
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Biolog-insight</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    @* <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />*@
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/style.css">
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/scripts/powerbi.js"></script>
+    <style>
+        .menu-top-level {
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper h-100">
+        
+    <div class="content flex-fill d-flex flex-column light-back">
+        <!--Here will go the header-->
+        <div class="container-fluid p-0">
+            <div class="header d-flex bg-white h-60">
+                <div class="menu-con pl-3 pr-3 cd-center text-white c-pointer menu-toggle-button">
+                    <i class="fa text-p fa-bars fa-2x"></i>
+                </div>
+                <div class="searchbox d-flex flex-fill cd-center pl-md-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text border-0 bg-transparent" id="basic-addon1"><i class="fa fa-search icon fa-color"></i></span>
+                        </div>
+                        <input type="text" class="form-control border-0" placeholder="Search hospitals, products, units or help" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="usercon d-flex" style="width:auto;">
+
+
+                   <div class="col drop-con pt-0 pb-0 pl-3 pr-3 cd-center d-flex flex-fill">
+                        <button class="p-0 m-0 border-0 bg-transparent h-100 dropdown-toggle text-muted" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="pr-2 pro-name">@ViewBag.username</span>
+                            <i class="fa fa-chevron-down pr-3"></i>
+                            <img src="~/images/user.png" class="rounded-circle" width="40" height="40">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item text-secondary" href="#">Account Setting</a>
+                            <a class="dropdown-item text-secondary" href="@Url.Action("Guide", "Home")?cfd=@ViewBag.current_folder" <!--onclick="window.open('http://52.191.118.216:801/guide/home');"-->>User Guide</a>
+                            <a class="dropdown-item text-secondary" href="@Url.Action("Logout","Login")">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- here will go the content -->
+        <div class="container-fluid flex-fill">
+            @RenderBody()
+        </div>
+
+        <div class="card-footer"
+             style="background: #fff;
+                border-top: 1px solid #dee2e6;
+                padding: 1rem 0.75rem;">
+            <div class="container-fluid">
+                <div class="text-muted row">
+                    <div class="container-fluid clearfix">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © <a href="http://www.bootstrapdash.com/" target="_blank">Biolog-Id</a>. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                            © 2019 - AppStack
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <!-- <script src="vendor/jquery/jquery.slim.min.js"></script> -->
+
+    <script>
+        $(document).ready(function () {
+            $sidebar = $('#sidebar');
+            if (window.innerWidth <= '767') {
+                $sidebar.removeClass("s-open open");
+            }
+
+
+            $('div.menu-toggle-button').on('click', function () {
+                if ($sidebar.hasClass("s-open")) {
+                    $sidebar.removeClass("s-open");
+                }
+                $sidebar.toggleClass('open');
+            });
+        });</script>
+</body>
+</html>

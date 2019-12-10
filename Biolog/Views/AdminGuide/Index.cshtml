@@ -1,0 +1,768 @@
+﻿@{
+    ViewData["Title"] = "Biolog>>Id Report Guide";
+}
+@using Biolog.Models.Guide
+
+<style>
+    .form-reports {
+        padding-left: 16px;
+        padding-bottom: 0px;
+        margin-bottom: 7px;
+        line-height: 32px;
+    }
+
+        .form-reports a {
+        }
+
+    .card-box-1st {
+        background-color: #ffffff;
+    }
+
+    .card-box-2nd {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+    }
+
+    .card-box-3rd {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: none;
+    }
+
+        .card-box-2nd .card-body, .card-box-3rd .card-body {
+            padding: 0px;
+        }
+
+    .report-sub-title {
+        font-size: 14px;
+        font-weight: bold;
+        padding-top: 9px;
+    }
+
+    .report-sub-normal {
+        font-size: 14px;
+        font-weight: 200;
+        margin-bottom: 5px;
+        padding-top: 0px;
+        color: #796e6e;
+    }
+
+    .word-wrap {
+        word-break: break-all;
+    }
+
+    .no-wrap {
+        white-space: nowrap;
+    }
+
+    .fixed {
+        table-layout: fixed;
+    }
+
+    .text-wrap {
+        white-space: normal;
+    }
+
+    .width-200 {
+        width: 200px;
+    }
+
+    .tab-pane {
+        background-color: white;
+        color: #796e6e;
+    }
+
+    .table td, .table thead th, .nav-tabs .nav-link {
+        color: #796e6e;
+    }
+
+        .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+            border-color: #d4d5d6 #d4d5d6 #ffffff;
+            background-color: white;
+        }
+
+    .bg-red-active, .modal-danger .modal-header, .modal-danger .modal-footer {
+        background-color: #d33724 !important;
+    }
+
+    .modal-danger .modal-header, .modal-danger .modal-footer {
+        border-color: #c23321;
+    }
+
+    .modal-header {
+        padding: 15px;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+        .modal-header .close {
+            margin-top: -2px;
+        }
+
+    button.close {
+        -webkit-appearance: none;
+        padding: 0;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+    }
+
+    .close {
+        float: right;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .2;
+    }
+
+    button, input, select, textarea {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+        button, html input[type=button], input[type=reset], input[type=submit] {
+            -webkit-appearance: button;
+            cursor: pointer;
+        }
+
+    button, select {
+        text-transform: none;
+    }
+
+    button {
+        overflow: visible;
+    }
+
+    button, input, optgroup, select, textarea {
+        margin: 0;
+        font: inherit;
+        color: inherit;
+    }
+
+    .modal-title {
+        margin: 0;
+        line-height: 1.42857143;
+    }
+
+    .bg-red, .callout.callout-danger, .alert-danger, .alert-error, .label-danger, .modal-danger .modal-body {
+        background-color: #dd4b39 !important;
+    }
+
+    .bg-red, .bg-yellow, .bg-aqua, .bg-blue, .bg-light-blue, .bg-green, .bg-navy, .bg-teal, .bg-olive, .bg-lime, .bg-orange, .bg-fuchsia, .bg-purple, .bg-maroon, .bg-black, .bg-red-active, .bg-yellow-active, .bg-aqua-active, .bg-blue-active, .bg-light-blue-active, .bg-green-active, .bg-navy-active, .bg-teal-active, .bg-olive-active, .bg-lime-active, .bg-orange-active, .bg-fuchsia-active, .bg-purple-active, .bg-maroon-active, .bg-black-active, .callout.callout-danger, .callout.callout-warning, .callout.callout-info, .callout.callout-success, .alert-success, .alert-danger, .alert-error, .alert-warning, .alert-info, .label-danger, .label-info, .label-warning, .label-primary, .label-success, .modal-primary .modal-body, .modal-primary .modal-header, .modal-primary .modal-footer, .modal-warning .modal-body, .modal-warning .modal-header, .modal-warning .modal-footer, .modal-info .modal-body, .modal-info .modal-header, .modal-info .modal-footer, .modal-success .modal-body, .modal-success .modal-header, .modal-success .modal-footer, .modal-danger .modal-body, .modal-danger .modal-header, .modal-danger .modal-footer {
+        color: #fff !important;
+    }
+
+    .modal-body {
+        position: relative;
+        padding: 15px;
+    }
+
+    .modal-danger .modal-header, .modal-danger .modal-footer {
+        border-color: #c23321;
+    }
+
+    .modal-footer {
+        border-top-color: #f4f4f4;
+    }
+
+    .modal-footer {
+        padding: 15px;
+        text-align: right;
+        border-top: 1px solid #e5e5e5;
+    }
+
+
+    .btn {
+        border-radius: 3px;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border: 1px solid transparent;
+    }
+
+    .modal-footer .btn + .btn {
+        margin-bottom: 0;
+        margin-left: 5px;
+    }
+
+    .modal-header {
+        display: inline-block;
+    }
+
+    .btn-outline:hover, .btn-outline:focus, .btn-outline:active {
+        color: rgba(255,255,255,0.7);
+        border-color: rgba(255,255,255,0.7);
+    }
+
+    .btn-outline {
+        border: 1px solid #fff;
+        background: transparent;
+        color: #fff;
+    }
+
+    .h4, h4 {
+        font-size: 18px;
+    }
+
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        font-family: 'Source Sans Pro',sans-serif;
+    }
+
+    .modal-header .close {
+        padding: unset;
+        margin: unset;
+    }
+
+    .modal-footer {
+        display: inline-block;
+    }
+</style>
+<div class="row" style="background-repeat: repeat-x;padding-top: 4px;background-image: url('~/../../banner_bg.png');"></div>
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-3 grid-margin stretch-card" style="display: block;">
+            <div class="card card-box-1st">
+                <div class="card-body" style="text-align: left;padding: 14px;">
+                    <h2 class="card-title" style="margin-bottom: 1px;">
+                        Report Links
+                    </h2>
+                    <div style="border-top-style:solid; border-top-width: 1px;color: #a1bbd5;"></div>
+                    <p class="card-description" style="margin-top: 15px;margin-bottom:0px;font-weight:bold;"><i class="fa fa-bar-chart-o"></i>&nbsp;Operational Reports<a style="padding: .375rem .1rem;" class="btn btn-default pull-right" data-toggle="modal" data-target="#report-edit" onclick="$('#eRname').val('');$('#eRkind').val('0');$('#eRfolder').val(''); $('#eRid').val('-1');"><i class="fa fa fa-plus"></i></a></p>
+
+                    @{
+                        foreach (Reports r in ViewBag.reportList)
+                        {
+                            if (r.Kindx == 0)
+                            {
+                                <div style="display: inline-block;width: 100%;" class="form-group form-reports">
+                                    <a style="color:#7092d3;" href="@Url.Action("Index", "AdminGuide")?rid=@r.Id">@r.ReportName</a>
+                                    <a style="padding: .375rem .1rem;" class="btn btn-default pull-right" data-toggle="modal" data-target="#report-remove" onclick="$('#rRname').html('Do you really remove report: @r.ReportName?'); $('#rRid').val('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                    <a style="padding: .375rem .1rem;" class="btn btn-default pull-right" data-toggle="modal" data-target="#report-edit" onclick="$('#eRname').val('@r.ReportName');$('#eRfolder').val('@r.FolderName'); $('#eRid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                </div>
+                            }
+                        }
+                    }
+
+                    <p class="card-description" style="margin-top: 15px;margin-bottom:0px;font-weight:bold;"><i class="fa fa fa-ravelry"></i>&nbsp;BI Solutions<a style="padding: .375rem .1rem;" class="btn btn-default pull-right" data-toggle="modal" data-target="#report-edit" onclick="$('#eRname').val('');$('#eRkind').val('1');$('#eRfolder').val(''); $('#eRid').val('-1');"><i class="fa fa fa-plus"></i></a></p>
+
+                    @{
+                        foreach (Reports r in ViewBag.reportList)
+                        {
+                            if (r.Kindx == 1)
+                            {
+                                <div style="display: inline-block;width: 100%;" class="form-group form-reports">
+                                    <a style="color:#7092d3;" href="@Url.Action("Index", "AdminGuide")?rid=@r.Id">@r.ReportName</a>
+                                    <a style="padding: .375rem .1rem;" class="btn btn-default pull-right" data-toggle="modal" data-target="#report-remove" onclick="$('#rRname').html('Do you really remove report: @r.ReportName?'); $('#rRid').val('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                    <a style="padding: .375rem .1rem;" class="btn btn-default pull-right" data-toggle="modal" data-target="#report-edit" onclick="$('#eRname').val('@r.ReportName');$('#eRfolder').val('@r.FolderName'); $('#eRid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                </div>
+                            }
+                        }
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        @if (@ViewBag.reportList.Count > 0)
+        {
+        <div class="col-md-9 grid-margin stretch-card" style="display: block;">
+            <div class="card card-box-2nd">
+                <div class="card-body" style="text-align:left;">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form id="guideTuserFrm" action="@Url.Action("GuideTUserEdit", "AdminGuide")" method="get" style="width: 100%;">
+                                <input type="hidden" name="rid" value="@ViewBag.crid" />
+                                <h4>Report Name: @ViewBag.reportList[ViewBag.cid].ReportName</h4>
+                                @{
+                                    foreach (ReportInfo r in ViewBag.userList)
+                                    {
+                                        <p style="display: inline-block;width: 100%;" class="report-sub-normal">@r.InfoName<a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id" class="btn btn-default pull-right"><i class="fa fa fa-remove"></i></a></p>
+                                    }
+                                }
+                                <p style="display: inline-block;width: 100%;" class="report-sub-normal"><input type="text" id="eRtuser" name="eRtuser" /><a onclick="$('#guideTuserFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
+                            </form>
+
+                            <form id="guideFreqFrm" action="@Url.Action("GuideFreqEdit", "AdminGuide")" method="get" style="width: 100%;">
+                                <input type="hidden" name="rid" value="@ViewBag.crid" />
+                                <p class="report-sub-title">Frequency:</p>
+                                @{
+                                    foreach (ReportInfo r in ViewBag.freqList)
+                                    {
+                                        <p style="display: inline-block;width: 100%;" class="report-sub-normal">•	@r.InfoName<a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?uid=@r.Id" class="btn btn-default pull-right"><i class="fa fa fa-remove"></i></a></p>
+                                    }
+                                }
+                                <p style="display: inline-block;width: 100%;" class="report-sub-normal"><input type="text" id="eRfreq" name="eRfreq" /><a onclick="$('#guideFreqFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
+                            </form>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <form id="guideFileFrm" enctype="multipart/form-data" action="@Url.Action("GuideFileEdit", "AdminGuide")" method="POST" style="width: 100%;">
+                                <input type="hidden" name="rid" value="@ViewBag.crid" />
+                                <input type="file" id="eRfile" name="eRfile" />
+                                <a onclick="$('#guideFileFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a>
+                            </form>
+                            <img src="~/@ViewBag.screenUrl" style="width: 100%;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <form id="guideAttrFrm" action="@Url.Action("GuideAttrEdit", "AdminGuide")" method="POST" style="    width: 100%;">
+                            <input type="hidden" name="rid" value="@ViewBag.crid" />
+                            <div class="col-lg-12">
+                                <p class="report-sub-title">Purpose:<a onclick="$('#guideAttrFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
+                                <textarea id="eRpurpose" name="eRpurpose" style="min-height:50px;width:100%;">@ViewBag.reportList[ViewBag.cid].Purpose</textarea>
+                                <p class="report-sub-title">Legend:<a onclick="$('#guideAttrFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
+                                @*{
+                                    foreach (string r in @ViewBag.reportList[ViewBag.cid].Audience.Split('.'))
+                                    {
+                                        <p class="report-sub-normal">@Html.Raw(r)</p>
+                                    }
+                                }*@
+                                <textarea id="eLegend" name="eLegend" style="min-height:130px;width:100%;">@ViewBag.reportList[ViewBag.cid].Audience</textarea>
+
+                                <p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    @{
+                                        var act = "";
+                                        if (@ViewBag.tid == 2) {act = "active"; } else { act = ""; }
+                                    }
+                                    <a class="nav-item nav-link @act" id="nav-filter-tab" data-toggle="tab" href="#nav-filter" role="tab" aria-controls="nav-filter" aria-selected="true">Filters</a>
+                                    @if (@ViewBag.tid == 3) {act = "active"; } else { act = ""; }
+                                    <a class="nav-item nav-link @act" id="nav-summary-tab" data-toggle="tab" href="#nav-summary" role="tab" aria-controls="nav-summary" aria-selected="false">Summary Counts</a>
+                                    @if (@ViewBag.tid == 4) {act = "active"; } else { act = ""; }
+                                    <a class="nav-item nav-link @act" id="nav-column-tab" data-toggle="tab" href="#nav-column" role="tab" aria-controls="nav-column" aria-selected="false">Columns</a>
+                                    @if (@ViewBag.tid == 5) {act = "active"; } else { act = ""; }
+                                    <a class="nav-item nav-link @act" id="nav-drill1-tab" data-toggle="tab" href="#nav-drill1" role="tab" aria-controls="nav-drill1" aria-selected="false">Drill-down-1</a>
+                                    @if (@ViewBag.tid == 6) {act = "active"; } else { act = ""; }
+                                    <a class="nav-item nav-link @act" id="nav-drill2-tab" data-toggle="tab" href="#nav-drill2" role="tab" aria-controls="nav-drill2" aria-selected="false">Drill-down-2</a>
+
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-filter" role="tabpanel" aria-labelledby="nav-filter-tab">
+                                    <table id="filter-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Filter Name</th>
+                                                <th width="100">Description</th>
+                                                <th>Use</th>
+                                                <th><a class="btn btn-default pull-right" data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('2');$('#eIname').val('');$('#eIdesc').val('');$('#eIuses').val(''); $('#eIid').val('0');$('#eIid').val('-1');"><i class="fa fa fa-plus"></i></a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.filterList)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                        <td>
+                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=2" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('2');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
+                                    <table id="summary-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                                <th><a class="btn btn-default pull-right" data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('3');$('#eIname').val('');$('#eIdesc').val('');$('#eIuses').val('');$('#eIid').val('-1');"><i class="fa fa fa-plus"></i></a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.summaryList)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                        <td>
+                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=3" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('3');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-column" role="tabpanel" aria-labelledby="nav-column-tab">
+                                    <table id="column-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Column Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                                <th><a class="btn btn-default pull-right" data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('4');$('#eIname').val('');$('#eIdesc').val('');$('#eIuses').val('');$('#eIid').val('-1');"><i class="fa fa fa-plus"></i></a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.columnList)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                        <td>
+                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=4" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('4');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-drill1" role="tabpanel" aria-labelledby="nav-drill1-tab">
+                                    <table id="drill1-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Column Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                                <th><a class="btn btn-default pull-right" data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('5');$('#eIname').val('');$('#eIdesc').val('');$('#eIuses').val('');$('#eIid').val('-1');"><i class="fa fa fa-plus"></i></a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.drill1List)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                        <td>
+                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=5" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('5');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="nav-drill2" role="tabpanel" aria-labelledby="nav-drill2-tab">
+                                    <table id="drill2-table" class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Use</th>
+                                                <th><a class="btn btn-default pull-right" data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('6');$('#eIname').val('');$('#eIdesc').val('');$('#eIuses').val('');$('#eIid').val('-1');"><i class="fa fa fa-plus"></i></a></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                foreach (ReportInfo r in ViewBag.drill2List)
+                                                {
+                                                    <tr>
+                                                        <td><strong>@r.InfoName</strong></td>
+                                                        <td>@r.Description</td>
+                                                        <td>@r.Uses</td>
+                                                        <td>
+                                                            <a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=6" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('6');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<div class="modal modal-danger fade" id="report-remove">
+    <form action="@Url.Action("GuideRemove", "AdminGuide")" method="POST">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Report Remove Dialog</h4>
+                </div>
+                <div class="modal-body">
+                    <p><div id="rRname"></div></p>
+                    <input type="hidden" id="rRid" name="rRid" />
+                    <input type="hidden" name="rid" value="@ViewBag.crid" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline">Submit</button>
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </form>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="report-edit">
+    <form action="@Url.Action("GuideEdit", "AdminGuide")" method="POST">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Report Add & Edit Dialog</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="FolderName">Folder Name:</label>
+                        <input type="text" class="form-control" id="eRfolder" name="eRfolder" placeholder="Enter Folder Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Report Kind:</label>
+                        <select class="form-control" id="eRkind" name="eRkind" placeholder="Enter Report Kind">
+                            <option value="0">Operational Reports</option>
+                            <option value="1">BI Solutions</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Report Name:</label>
+                        <input type="text" class="form-control" id="eRname" name="eRname" placeholder="Enter Report Name">
+                    </div>
+                    <input type="hidden" id="eRid" name="eRid" value="" />
+                    <input type="hidden" name="rid" value="@ViewBag.crid" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </form>
+</div>
+
+<div class="modal fade" id="reportinfo-edit">
+    <form action="@Url.Action("EditReportInfoRow", "AdminGuide")" method="POST">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Report Information Add & Edit Dialog</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="FolderName">Name :</label>
+                        <input type="text" class="form-control" id="eIname" name="eIname" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Description:</label>
+                        <textarea style="min-height:110px;" class="form-control" id="eIdesc" name="eIdesc" placeholder="Enter Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Uses:</label>
+                        <textarea style="min-height:100px;" class="form-control" id="eIuses" name="eIuses" placeholder="Enter Uses"></textarea>
+                    </div>
+                    <input type="hidden" id="eIid" name="eIid" value="" />
+                    <input type="hidden" id="tid" name="tid" value="" />
+                    <input type="hidden" name="rid" value="@ViewBag.crid" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" onclick="editReportinfo();" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </form>
+</div>
+
+<script src="~/datatables.net/js/jquery.dataTables.min.js"></script>
+<script>
+    function removeReportInfo(id) {
+        //alert('really do you remove?');
+    }
+    function editReportinfo() {
+        return;
+        $.ajax({
+            url: "~/AdminGuide/editReportInfoRow",
+            type: 'post',
+            data: {
+                eIname:$("#eIname").val(),
+                eIdesc:$("#eIdesc").val(),
+                eIuses:$('#eIuses').val(),
+                eRid:$('#eRid').val(),
+                rid:$("#rid").val()
+            },
+            dataType: "json",
+            success: function( $data ) {
+                
+            },
+            error: function(e) {
+                
+            }
+        });
+    }
+    $(document).ready(function () {
+        $("#filter-table").removeAttr('width').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            columnDefs: [
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                    },
+                    targets: 0
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:200px;'>" + data + "</div>";
+                    },
+                    targets: 1
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap'>" + data + "</div>";
+                    },
+                    targets: 2
+                }
+            ]
+        });
+
+        $("#summary-table").removeAttr('width').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            columnDefs: [
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                    },
+                    targets: 0
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                    },
+                    targets: 1
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap'>" + data + "</div>";
+                    },
+                    targets: 2
+                }
+            ]
+        });
+
+        $("#column-table").removeAttr('width').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            columnDefs: [
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                    },
+                    targets: 0
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                    },
+                    targets: 1
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap'>" + data + "</div>";
+                    },
+                    targets: 2
+                }
+            ]
+        });
+
+        $("#drill1-table").removeAttr('width').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            columnDefs: [
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                    },
+                    targets: 0
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                    },
+                    targets: 1
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap'>" + data + "</div>";
+                    },
+                    targets: 2
+                }
+            ]
+        });
+
+        $("#drill2-table").removeAttr('width').dataTable({
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            columnDefs: [
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:125px;'>" + data + "</div>";
+                    },
+                    targets: 0
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap' style='width:250px;'>" + data + "</div>";
+                    },
+                    targets: 1
+                },
+                {
+                    render: function (data, type, full, meta) {
+                        return "<div class='text-wrap'>" + data + "</div>";
+                    },
+                    targets: 2
+                }
+            ]
+        });
+    });
+</script>

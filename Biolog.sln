@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biolog", "Biolog\Biolog.csproj", "{F2E20EBB-88BF-4081-9F07-36ADF2F5CB18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2E20EBB-88BF-4081-9F07-36ADF2F5CB18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E20EBB-88BF-4081-9F07-36ADF2F5CB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E20EBB-88BF-4081-9F07-36ADF2F5CB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E20EBB-88BF-4081-9F07-36ADF2F5CB18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D387A8D-9FCE-4A5F-A94A-6F196A9AA9F7}
+	EndGlobalSection
+EndGlobal
