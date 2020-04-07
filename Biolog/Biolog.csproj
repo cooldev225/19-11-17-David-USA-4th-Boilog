@@ -313,12 +313,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1.jpg" />
-    <Content Include="2.jpg" />
-    <Content Include="3.jpg" />
-    <Content Include="4.jpg" />
-    <Content Include="5.jpg" />
-    <Content Include="6.jpg" />
+    <Content Include="imgGuide\1.jpg" />
+    <Content Include="imgGuide\2.jpg" />
+    <Content Include="imgGuide\3.jpg" />
+    <Content Include="imgGuide\4.jpg" />
+    <Content Include="imgGuide\5.jpg" />
+    <Content Include="imgGuide\6.jpg" />
     <Content Include="css\AdminLTE.min.css" />
     <Content Include="css\bootstrap1.min.css" />
     <Content Include="css\_all-skins.min.css" />
@@ -379,7 +379,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="imgGuide\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -488,6 +487,7 @@
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\AdminGuide\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\GuideOld.cshtml" />
     <None Include="Web References\WebReference\ReportService2010.wsdl" />
     <Content Include="Web References\WebReference\Role.datasource">
       <DependentUpon>Reference.map</DependentUpon>

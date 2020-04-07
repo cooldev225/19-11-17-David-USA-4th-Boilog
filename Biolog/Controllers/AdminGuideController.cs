@@ -174,12 +174,12 @@ namespace Biolog.Controllers
                 return RedirectToAction("Index", "Login");
             }
         }
-        public ActionResult GuideAttrEdit(int rid = 0, string sch = "", string eRpurpose = "", string eLegend="")
+        public ActionResult GuideAttrEdit(int rid = 0, string sch = "", string eRdescription = "", string eRpurpose = "", string eLegend="")
         {
             if (CheckUserSession())
             {
                 //string ur = @"http://52.191.118.216:801/Guide/aEditReport?rid=" + eRid+"&kind="+eRkind+"&folder="+eRfolder+"&name="+eRname;
-                string ur = @"http://localhost:8801/Guide/aEditReportAttr?rid=" + rid + "&purpose=" + eRpurpose + "&legend=" + eLegend;
+                string ur = @"http://localhost:8801/Guide/aEditReportAttr?rid=" + rid + "&description=" + eRdescription + "&purpose=" + eRpurpose + "&legend=" + eLegend;
                 string res = getAPIrequest(ur);
                 return RedirectToAction(actionName: "Index", controllerName: "AdminGuide",
                 routeValues: new { rid = rid, sch = sch });

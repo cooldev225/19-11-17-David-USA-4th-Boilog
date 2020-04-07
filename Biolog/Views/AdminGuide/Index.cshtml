@@ -273,6 +273,8 @@
                 <div class="card-body" style="text-align:left;">
                     <div class="row">
                         <div class="col-lg-6">
+                            <p class="report-sub-title">Purpose:<a onclick="$('#guideAttrFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
+                            <textarea id="eRpurpose" name="eRpurpose" style="min-height:50px;width:100%;">@ViewBag.reportList[ViewBag.cid].Purpose</textarea>
                             <form id="guideTuserFrm" action="@Url.Action("GuideTUserEdit", "AdminGuide")" method="get" style="width: 100%;">
                                 <input type="hidden" name="rid" value="@ViewBag.crid" />
                                 <h4>Report Name: @ViewBag.reportList[ViewBag.cid].ReportName</h4>
@@ -311,15 +313,18 @@
                         <form id="guideAttrFrm" action="@Url.Action("GuideAttrEdit", "AdminGuide")" method="POST" style="    width: 100%;">
                             <input type="hidden" name="rid" value="@ViewBag.crid" />
                             <div class="col-lg-12">
+                                <p class="report-sub-title">Description:<a onclick="$('#guideAttrFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
+                                <textarea id="eRdescription" name="eRdescription" style="min-height:50px;width:100%;">@ViewBag.reportList[ViewBag.cid].Frequency</textarea>
+
                                 <p class="report-sub-title">Purpose:<a onclick="$('#guideAttrFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
                                 <textarea id="eRpurpose" name="eRpurpose" style="min-height:50px;width:100%;">@ViewBag.reportList[ViewBag.cid].Purpose</textarea>
                                 <p class="report-sub-title">Legend:<a onclick="$('#guideAttrFrm').submit();" class="btn btn-default pull-right"><i class="fa fa fa-edit"></i>Submit</a></p>
                                 @*{
-                                    foreach (string r in @ViewBag.reportList[ViewBag.cid].Audience.Split('.'))
-                                    {
-                                        <p class="report-sub-normal">@Html.Raw(r)</p>
-                                    }
-                                }*@
+            foreach (string r in @ViewBag.reportList[ViewBag.cid].Audience.Split('.'))
+            {
+                <p class="report-sub-normal">@Html.Raw(r)</p>
+            }
+        }*@
                                 <textarea id="eLegend" name="eLegend" style="min-height:130px;width:100%;">@ViewBag.reportList[ViewBag.cid].Audience</textarea>
 
                                 <p>
@@ -347,7 +352,8 @@
                                 </div>
                             </nav>
                             <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-filter" role="tabpanel" aria-labelledby="nav-filter-tab">
+                                @if (@ViewBag.tid == 2) { act = "active"; } else { act = ""; }
+                                <div class="tab-pane fade show @act" id="nav-filter" role="tabpanel" aria-labelledby="nav-filter-tab">
                                     <table id="filter-table" class="table table-hover">
                                         <thead>
                                             <tr>
@@ -366,7 +372,7 @@
                                                         <td>@r.Description</td>
                                                         <td>@r.Uses</td>
                                                         <td>
-                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=2" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=2" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
                                                             <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('2');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
                                                         </td>
                                                     </tr>
@@ -375,7 +381,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
+                                @if (@ViewBag.tid == 3) { act = "active"; } else { act = ""; }
+                                <div class="tab-pane fade @act" id="nav-summary" role="tabpanel" aria-labelledby="nav-summary-tab">
                                     <table id="summary-table" class="table table-hover">
                                         <thead>
                                             <tr>
@@ -394,7 +401,7 @@
                                                         <td>@r.Description</td>
                                                         <td>@r.Uses</td>
                                                         <td>
-                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=3" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=3" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
                                                             <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('3');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
                                                         </td>
                                                     </tr>
@@ -403,7 +410,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="nav-column" role="tabpanel" aria-labelledby="nav-column-tab">
+                                @if (@ViewBag.tid == 4) { act = "active"; } else { act = ""; }
+                                <div class="tab-pane fade @act" id="nav-column" role="tabpanel" aria-labelledby="nav-column-tab">
                                     <table id="column-table" class="table table-hover">
                                         <thead>
                                             <tr>
@@ -422,7 +430,7 @@
                                                         <td>@r.Description</td>
                                                         <td>@r.Uses</td>
                                                         <td>
-                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=4" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=4" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
                                                             <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('4');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
                                                         </td>
                                                     </tr>
@@ -431,7 +439,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="nav-drill1" role="tabpanel" aria-labelledby="nav-drill1-tab">
+                                @if (@ViewBag.tid == 5) { act = "active"; } else { act = ""; }
+                                <div class="tab-pane fade @act" id="nav-drill1" role="tabpanel" aria-labelledby="nav-drill1-tab">
                                     <table id="drill1-table" class="table table-hover">
                                         <thead>
                                             <tr>
@@ -450,7 +459,7 @@
                                                         <td>@r.Description</td>
                                                         <td>@r.Uses</td>
                                                         <td>
-                                                            <a  href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=5" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
+                                                            <a href="@Url.Action("GuideReportInfoRemove", "AdminGuide")?rid=@ViewBag.crid&uid=@r.Id&tid=5" onclick="removeReportInfo('@r.Id');"><i class="fa fa fa-remove"></i></a>
                                                             <a data-toggle="modal" data-target="#reportinfo-edit" onclick="$('#tid').val('5');$('#eIname').val('@r.InfoName');$('#eIdesc').val('@r.Description');$('#eIuses').val('@r.Uses');$('#eIid').val('@r.Id');"><i class="fa fa fa-edit"></i></a>
                                                         </td>
                                                     </tr>
@@ -459,7 +468,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="nav-drill2" role="tabpanel" aria-labelledby="nav-drill2-tab">
+                                @if (@ViewBag.tid == 6) { act = "active"; } else { act = ""; }
+                                <div class="tab-pane fade @act" id="nav-drill2" role="tabpanel" aria-labelledby="nav-drill2-tab">
                                     <table id="drill2-table" class="table table-hover">
                                         <thead>
                                             <tr>
